@@ -2,8 +2,23 @@
   <head>
     <script src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+    <title>營火聊天室</title>
   </head>
+  <style>
+    body {background-color: black;}
+    div {color: white;}
+    img.fixed {
+      position: fixed;
+    bottom: 0;
+    right: 0;
+    }
+  </style>
   <body>
+    <fieldset>
+        <input type='text' id='nameInput' placeholder='Name'>
+        <input type='text' id='messageInput' placeholder='Message'>
+    </fieldset>
+    <img src="1399684731559.gif" alt="Bonfire" style="width:512px;height:512px;" class="fixed"/>
     <div id='messagesDiv'></div>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
     <script>
@@ -18,8 +33,7 @@
         };
         firebase.initializeApp(config);
       </script>
-    <input type='text' id='nameInput' placeholder='Name'>
-    <input type='text' id='messageInput' placeholder='Message'>
+
     <script>
       var myDataRef = new Firebase('https://johntarouproject.firebaseio.com/');
       $('#messageInput').keypress(function (e) {
@@ -30,6 +44,9 @@
           $('#messageInput').val('');
         }
       });
+        //刪除節點
+        //Firebase userRef = myDataRef.child("1");
+        //userRef.removeValue();
       myDataRef.on('child_added', function(snapshot) {
         var message = snapshot.val();
 		displayChatMessage(message.name, message.text);
